@@ -1,7 +1,7 @@
 <?php
 return [
         'title' => '城管信息',
-        'pro' => '栏目',
+        'pro' => '板块',
         'comment' => '评论',
         'upload' => '上传',
         'posts_per_page' => 20,

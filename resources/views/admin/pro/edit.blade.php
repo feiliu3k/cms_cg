@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row page-title-row">
         <div class="col-md-12">
-            <h3>栏目 <small>» 编辑</small></h3>
+            <h3>{{ config('cms.pro') }} <small>» 编辑</small></h3>
         </div>
     </div>
 
@@ -12,7 +12,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">编辑栏目窗口</h3>
+                    <h3 class="panel-title">编辑{{ config('cms.pro') }}窗口</h3>
                 </div>
                 <div class="panel-body">
 
@@ -62,7 +62,7 @@
             <div class="modal-body">
                 <p class="lead">
                     <i class="fa fa-question-circle fa-lg"></i>
-                    是否真的需要删除此栏目？
+                    是否真的需要删除此{{ config('cms.pro') }}？
                 </p>
             </div>
             <div class="modal-footer">
