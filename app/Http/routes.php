@@ -44,6 +44,7 @@ $router->group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     resource('admin/role','RoleController');
     resource('admin/permission','PermissionController');
     resource('admin/resource','ResourceController');
+    resource('admin/jrsx','JrsxController');
 
     post('admin/news/search',['uses'=>'NewsController@search','as'=>'admin.news.search']);
     resource('admin/news', 'NewsController', ['except' => 'show']);
