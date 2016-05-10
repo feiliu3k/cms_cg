@@ -1,6 +1,6 @@
 <?php
 return [
-        'title' => '新闻',
+        'title' => '城管信息',
         'pro' => '栏目',
         'comment' => '评论',
         'upload' => '上传',

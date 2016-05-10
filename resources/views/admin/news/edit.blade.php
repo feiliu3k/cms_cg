@@ -13,7 +13,7 @@
 <div class="container-fluid">
     <div class="row page-title-row">
         <div class="col-md-12">
-            <h3>新闻 <small>» 编辑</small></h3>
+            <h3>{{ config('cms.title') }} <small>» 编辑</small></h3>
         </div>
     </div>
 
@@ -21,7 +21,7 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">新闻编辑窗口</h3>
+                    <h3 class="panel-title">{{ config('cms.title') }}编辑窗口</h3>
                 </div>
                 <div class="panel-body">
 
@@ -73,7 +73,7 @@
                 <div class="modal-body">
                     <p class="lead">
                         <i class="fa fa-question-circle fa-lg"></i>
-                        是否确定删除此新闻？
+                        是否确定删除此{{ config('cms.title') }}？
                     </p>
                 </div>
                 <div class="modal-footer">

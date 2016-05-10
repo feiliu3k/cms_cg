@@ -71,26 +71,6 @@
                  </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-8 col-md-offset-3">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="commentflag" value=1 @if ($commentflag==1) checked="checked" @endif>
-                        打开评论
-                    </label>
-                 </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-           <label for="readnum" class="col-md-3 control-label">
-                阅读数
-            </label>
-            <div class="col-md-8">
-                <input type="text" class="form-control" name="readnum" autofocus id="readnum" value="{{ $readnum }}">
-            </div>
-        </div>
-
 
         <div class="form-group">
             <label for="proid" class="col-md-3 control-label">

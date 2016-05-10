@@ -4,11 +4,11 @@
 <div class="container-fluid">
     <div class="row page-title-row">
         <div class="col-md-6">
-            <h3>新闻 <small>» 列表</small></h3>
+            <h3>{{ config('cms.title') }} <small>» 列表</small></h3>
         </div>
         <div class="col-md-6 text-right">
             <a href="{{ route('admin.news.create') }}" class="btn btn-success btn-md">
-                <i class="fa fa-plus-circle"></i> 新建新闻
+                <i class="fa fa-plus-circle"></i> 新建{{ config('cms.title') }}
             </a>
         </div>
     </div>
@@ -36,13 +36,12 @@
             <thead>
                 <tr>
                     <th>发布时间</th>
-                    <th>新闻标题</th>
+                    <th>标题</th>
                     <th>栏目名称</th>
                     <th>发布人</th>
                     <th>审核人</th>
                     <th>审核标志</th>
                     <th>草稿标志</th>
-                    <th>评论标志</th>
                     <th data-sortable="false">操作</th>
                 </tr>
             </thead>
@@ -76,13 +75,7 @@
                             已发布
                         @endif
                     </td>
-                    <td class="hidden-sm">
-                        @if ($chaoSky->commentflag)
-                            开启
-                        @else
-                            关闭
-                        @endif
-                    </td>
+
                     <td>
                         <a href="{{ route('admin.news.edit', $chaoSky->tipid) }}" class="btn btn-xs btn-info">
                             <i class="fa fa-edit"></i> 编辑
