@@ -20,7 +20,7 @@ class CreateJrsxTable extends Migration
             $table->text('comments');
             $table->timestamp('postdate')->nullable()->index();
             $table->integer('delflag')->default(0)->index();
-            $table->integer('fl')->default(1)->index();
+            $table->integer('f1')->default(1)->index();
             $table->string('ip');
             $table->string('localrecord');
         });

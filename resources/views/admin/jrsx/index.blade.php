@@ -37,14 +37,14 @@
 
             <div class="panel-body remove-padding-horizontal main-body">
                 <ul class="list-group row topic-list">
-                    <?php if (count($jrsxes)>0){
-                        foreach ($jrsxes as $jrsx){
-                            if (strlen(trim($jrsx['pic']))>0){
-                                $imgs=explode(',',substr(trim($jrsx['pic']),0,-1));
-                            }else{
-                                $imgs=[];
-                            }
-                    ?>
+                @if (count($jrsxes)>0){
+                    @foreach ($jrsxes as $jrsx)
+                        @if (strlen(trim($jrsx['pic']))>0)
+                            $imgs=explode(',',substr(trim($jrsx['pic']),0,-1));
+                        @else
+                            $imgs=[];
+                        @endif
+
                     <li class="list-group-item media 1" style="margin-top: 0px;">
 
                         <div class="pull-left avatar">
@@ -68,63 +68,30 @@
                                 </a>
                             </div>
                             <div class="add-margin-bottom">
-                                <?php
 
-                                if (count($imgs)>0){
-                                    foreach ($imgs as $img){
-                                        $pos = containsDescenders($img);
-                                        if ($pos === false){
-                                ?>
-
-                                    <img class="js-lightbox"
-                                        data-role="lightbox"
-                                        data-source="<?php echo $conf['uploadPath'].$img ?>"
-                                        src="<?php echo $conf['uploadPath'].$img ?>"
-                                        data-group="<?php echo $jrsx['id'] ?>"
-                                        data-id="<?php echo $img ?>"
-                                        data-caption="<?php echo $jrsx['username'] ?>"
-                                        data-desc="<?php echo $jrsx['comments'] ?>"
-                                        alt="<?php echo $img ?>"
-                                        width="100px" height="100px" />
-                                <?php
-                                        }else{ ?>
-                                        <img class="js-videobox"
-                                        data-role="videobox"
-                                        data-source="<?php echo $conf['uploadPath'].$img ?>"
-                                        src="img/play.png"
-                                        width="100px" height="100px" />
-                                    <!--<video width="320" height="240" controls>
-                                        <source src="<?php echo $conf['uploadPath'].$img ?>" type="video/mp4">
-                                    </video>-->
-                                <?php        }
-                                    }
-                                }
-                                ?>
                             </div>
 
 
                             <div class="add-margin-bottom">
-                                <span class="username">姓名：<?php echo $jrsx['username'] ?></span>
+                            <span class="username">姓名：{{ $jrsx->username }}</span>
                                 <span> • </span>
-                                <span class="dh">手机号码：<?php echo $jrsx['dh'] ?></span>
+                                <span class="dh">手机号码：{{ $jrsx->dh }}</span>
                                 <span> • </span>
-                                <span class="postdate">发表时间：<?php echo $jrsx['postdate'] ?></span>
+                                <span class="postdate">发表时间：{{ $jrsx->postdate }}</span>
                             </div>
 
 
                             <div class="media-command">
-                                <a href="<?php echo 'Jrsxdetail.php?id='.$jrsx['id'] ?>" class="btn btn-primary btn-xs">备注</a>
-                                <button type="button" data-jrsxid="<?php echo $jrsx['id'] ?>"  data-page="<?php echo $page?>" class="btn btn-success btn-xs btn-fav">收藏</button>
-                                <button type="button" data-banrecord="<?php echo $jrsx['localrecord'] ?>"  data-page="<?php echo $page?>" class="btn btn-warning btn-xs btn-ban">禁止</button>
-                                <button type="button" data-jrsxid="<?php echo $jrsx['id'] ?>"  data-page="<?php echo $page?>" data-condition="<?php echo $url ?>" class="btn btn-danger btn-xs btn-delete">删除</button>
+                                <a href="#" class="btn btn-primary btn-xs">备注</a>
+                                <button type="button" data-jrsxid="#"  data-page="#" class="btn btn-success btn-xs btn-fav">收藏</button>
+                                <button type="button" data-banrecord="#"  data-page="#" class="btn btn-warning btn-xs btn-ban">禁止</button>
+                                <button type="button" data-jrsxid="#"  data-page="#" data-condition="#" class="btn btn-danger btn-xs btn-delete">删除</button>
                             </div>
                         </div>
 
                     </li>
-                <?php
-                    }
-                }
-                ?>
+                    @endforeach
+               @endif
                 </ul>
             </div>
 
