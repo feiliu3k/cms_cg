@@ -23,26 +23,7 @@ class JrsxController extends Controller
         return view('admin.jrsx.index',compact('jrsxes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -52,31 +33,13 @@ class JrsxController extends Controller
      */
     public function show($id)
     {
-        //
+        $jrsx = ChaoSky::where('id',$id)->where('delflag',0)->first();
+
+        return view('admin.jrsx.jrsx')->withPost($jrsx);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -86,7 +49,13 @@ class JrsxController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $jrsx = Jrsx::findOrFail($id);
+
+        $jrsx->delflag=1;
+        $jrsx->save();
+        return redirect()
+                        ->route('admin.jrsx.index')
+                        ->withSuccess('报料信息删除成功.');
     }
 
         /**
@@ -97,27 +66,14 @@ class JrsxController extends Controller
      */
     public function search(Request $request)
     {
-        $pros=ChaoPro::where('proname','like', '%'.$request->searchText.'%')->get();
-        $users=User::where('name','like', '%'.$request->searchText.'%')->get();
-
-        $proids=array();
-        foreach ($pros as $pro) {
-            array_push($proids, $pro->id);
-        }
-
-        $userids=array();
-        foreach ($users as $user) {
-            array_push($userids, $user->id);
-        }
-
-        $chaoSkies = ChaoSky::where('delflag',0)
-                            ->where('tiptitle', 'like', '%'.$request->searchText.'%')
-                            ->orwhere('tipcontent', 'like', '%'.$request->searchText.'%')
-                            ->orwherein('proid',$proids)
-                            ->orwherein('userid',$userids)
-                            ->orderBy('stime', 'desc')
+        $searchText = $request->searchText;
+        $jrsxes = Jrsx::where('delflag',0)
+                            ->where('username', 'like', '%'.$request->searchText.'%')
+                            ->orwhere('dh', 'like', '%'.$request->searchText.'%')
+                            ->orwherein('comments','like', '%'.$request->searchText.'%')
+                            ->orderBy('postdate', 'desc')
                             ->paginate(config('cms.posts_per_page'));
 
-        return view('admin.news.index',compact('chaoSkies'));
+        return view('admin.jrsx.index',compact('jrsxes','searchText'));
     }
 }
