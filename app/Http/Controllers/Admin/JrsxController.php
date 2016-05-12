@@ -23,8 +23,37 @@ class JrsxController extends Controller
         return view('admin.jrsx.index',compact('jrsxes'));
     }
 
+    public function fav()
+    {
+        $jrsxes = Jrsx::where('delflag',0)
+                ->orderBy('postdate', 'desc')
+                ->paginate(config('cms.posts_per_page'));
+        return view('admin.jrsx.fav',compact('jrsxes'));
+    }
 
+    public function remark()
+    {
+        $jrsxes = Jrsx::where('delflag',0)
+                ->orderBy('postdate', 'desc')
+                ->paginate(config('cms.posts_per_page'));
+        return view('admin.jrsx.remark',compact('jrsxes'));
+    }
 
+    public function addRemark()
+    {
+        $jrsxes = Jrsx::where('delflag',0)
+                ->orderBy('postdate', 'desc')
+                ->paginate(config('cms.posts_per_page'));
+        return view('admin.jrsx.remark',compact('jrsxes'));
+    }
+
+    public function UpdateRemark()
+    {
+        $jrsxes = Jrsx::where('delflag',0)
+                ->orderBy('postdate', 'desc')
+                ->paginate(config('cms.posts_per_page'));
+        return view('admin.jrsx.remark',compact('jrsxes'));
+    }
     /**
      * Display the specified resource.
      *

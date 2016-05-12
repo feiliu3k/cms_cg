@@ -36,8 +36,7 @@
             </div>
             <div class="panel-body remove-padding-horizontal main-body">
                 <ul class="list-group row topic-list">
-                @if (count($jrsxes)>0)
-                    @foreach ($jrsxes as $jrsx)
+                @if ($jrsx)
                         <li class="list-group-item media 1" style="margin-top: 0px;">
                             <div class="pull-left avatar">
                                 <a href="#">
@@ -101,7 +100,6 @@
                                 </div>
                             </div>
                         </li>
-                    @endforeach
                 @endif
                 </ul>
             </div>
