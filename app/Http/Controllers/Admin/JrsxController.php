@@ -88,4 +88,36 @@ class JrsxController extends Controller
     {
         //
     }
+
+        /**
+     * Search  the specified post.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $pros=ChaoPro::where('proname','like', '%'.$request->searchText.'%')->get();
+        $users=User::where('name','like', '%'.$request->searchText.'%')->get();
+
+        $proids=array();
+        foreach ($pros as $pro) {
+            array_push($proids, $pro->id);
+        }
+
+        $userids=array();
+        foreach ($users as $user) {
+            array_push($userids, $user->id);
+        }
+
+        $chaoSkies = ChaoSky::where('delflag',0)
+                            ->where('tiptitle', 'like', '%'.$request->searchText.'%')
+                            ->orwhere('tipcontent', 'like', '%'.$request->searchText.'%')
+                            ->orwherein('proid',$proids)
+                            ->orwherein('userid',$userids)
+                            ->orderBy('stime', 'desc')
+                            ->paginate(config('cms.posts_per_page'));
+
+        return view('admin.news.index',compact('chaoSkies'));
+    }
 }

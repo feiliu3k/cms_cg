@@ -22,4 +22,13 @@ class Jrsx extends Model
     {
         return $this->hasMany('App\Jrsxremark','jrsxid','id');
     }
+
+    public function getPicAttribute($value)
+    {
+        $imgs=[];
+        if (strlen(trim($value))>0){
+            $imgs=explode(',',substr(trim($value),0,-1));
+        }
+        return $imgs;
+    }
 }

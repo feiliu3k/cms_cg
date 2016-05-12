@@ -13,4 +13,8 @@ return [
         ],
         'news_image_path'=>'../../uploads/',
         'news_video_path'=>'../../uploads/',
+        'jrsx' => [
+            'imagePath'=>'http://localhost/',
+            'videoPath'=>'http://localhost/',
+        ],
 ];

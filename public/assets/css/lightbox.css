@@ -26,7 +26,7 @@
     border: 5px solid #fff;
     border-radius: 3px;
     overflow: hidden;
-    background:#fff url(../img/loading.gif) no-repeat center center;
+    background:#fff url(../../img/loading.gif) no-repeat center center;
 }
 
 #G-lightbox-popup .lightbox-pic-view .lightbox-btn{
@@ -46,12 +46,12 @@
 }
 
 #G-lightbox-popup .lightbox-pic-view .lightbox-prev-btn-show{
-    background:url(../img/prev.png) no-repeat left center;
+    background:url(../../img/prev.png) no-repeat left center;
     cursor: pointer;
 }
 
 #G-lightbox-popup .lightbox-pic-view .lightbox-next-btn-show{
-    background:url(../img/next.png) no-repeat right center;
+    background:url(../../img/next.png) no-repeat right center;
     cursor:pointer;
 }
 
