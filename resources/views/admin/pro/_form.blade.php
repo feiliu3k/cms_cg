@@ -17,6 +17,17 @@
 </div>
 
 <div class="form-group">
+    <div class="col-md-8 col-md-offset-3">
+        <div class="checkbox">
+            <label>
+                <input  type="checkbox" name="rebellion" value=2 @if ($rebellion==2) checked="checked" @endif >
+                报料
+            </label>
+         </div>
+    </div>
+</div>
+
+<div class="form-group">
     <label for="proimg" class="col-md-3 control-label">
         {{ config('cms.pro') }}缩略图
     </label>

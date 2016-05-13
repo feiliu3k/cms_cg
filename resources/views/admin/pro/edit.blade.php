@@ -37,7 +37,10 @@
                                     <i class="fa fa-times-circle"></i>
                                     删除
                                 </button>
-
+                                <a type="button" class="btn btn-primary btn-md" href="{{ route('admin.pro.index') }}">
+                                    <i class="fa fa-reply"></i>
+                                    返回
+                                </a>
                             </div>
                         </div>
 

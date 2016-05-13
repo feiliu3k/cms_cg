@@ -24,6 +24,7 @@
                         <tr>
                             <th>编号</th>
                             <th class="hidden-md">名称</th>
+                            <th class="hidden-md">报料</th>
                             <th class="hidden-md">缩略图</th>
                             <th data-sortable="false">操作</th>
                         </tr>
@@ -33,6 +34,13 @@
                         <tr>
                             <td>{{ $pro->proid }}</td>
                             <td class="hidden-md">{{ $pro->proname }}</td>
+                             <td class="hidden-sm">
+                                @if ($pro->rebellion==2)
+                                    有报料功能
+                                @else
+                                    无报料功能
+                                @endif
+                            </td>
                             <td class="hidden-md">{{ $pro->proimage }}</td>
                             <td>
                                 <a href="{{ route('admin.pro.edit', $pro->id) }}" class="btn btn-xs btn-info">

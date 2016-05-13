@@ -18,6 +18,7 @@ class ProController extends Controller
         'proid' => '',
         'proname' => '',
         'proimg' => '',
+        'rebellion' =>'1',
     ];
     /**
      * Display a listing of the resource.
