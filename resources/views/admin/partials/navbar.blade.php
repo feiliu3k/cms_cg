@@ -8,7 +8,7 @@
         @endcan
         @can('edit-jrsx')
         <li @if (Request::is('admin/jrsx*')) class="active" @endif>
-            <a href="{{ url('admin/jrsx') }}">{{ config('cms.jrsx') }}</a>
+            <a href="{{ url('admin/jrsx') }}">{{ config('cms.jrsx.jrsx') }}</a>
         </li>
         @endcan
         @can('edit-pro')

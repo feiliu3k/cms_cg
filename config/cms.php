@@ -1,7 +1,6 @@
 <?php
 return [
         'title' => '城管信息',
-        'jrsx' => '报料',
         'pro' => '板块',
         'comment' => '评论',
         'upload' => '上传',
@@ -14,6 +13,7 @@ return [
         'news_image_path'=>'../../uploads/',
         'news_video_path'=>'../../uploads/',
         'jrsx' => [
+            'jrsx' => '报料',
             'imagePath'=>'http://localhost/',
             'videoPath'=>'http://localhost/',
         ],
