@@ -7,18 +7,20 @@
 @stop
 @section('content')
 <div class="container-fluid">
+    @include('admin.partials.errors')
+    @include('admin.partials.success')
     <div class="col-md-8 col-md-offset-1 topics-index main-col">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <ul class="pull-right list-inline remove-margin-bottom topic-filter">
                     <li>
-                        <a href="#" class="selected">
-                            <i class="glyphicon glyphicon-time"></i> 最近发表
+                        <a href="{{ route('admin.jrsx.index') }}" class="selected">
+                            <i class="glyphicon glyphicon-time"></i> 报料首页
                         </a>
                         <span class="divider"></span>
                     </li>
 
-                    <li>
+                   <!--  <li>
                         <a href="#" >
                             <i class="glyphicon glyphicon-ok"> </i> 随手拍
                         </a>
@@ -30,7 +32,7 @@
                             <i class="glyphicon glyphicon-thumbs-up"> </i> 微报料
                         </a>
                         <span class="divider"></span>
-                    </li>
+                    </li> -->
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -94,11 +96,11 @@
                                 </div>
 
 
-                                <div class="media-command">
+                                <!-- <div class="media-command">
                                     <a href="#" class="btn btn-primary btn-xs">备注</a>
                                     <button type="button" data-jrsxid="#"  data-page="#" class="btn btn-success btn-xs btn-fav">收藏</button>
                                     <button type="button" data-jrsxid="#"  data-page="#" data-condition="#" class="btn btn-danger btn-xs btn-delete">删除</button>
-                                </div>
+                                </div> -->
                             </div>
                         </li>
                     @endforeach
@@ -107,7 +109,11 @@
             </div>
 
             <div class="panel-footer text-right">
-                {!! $jrsxes->render() !!}
+                @if ($searchText)
+                    {!! $jrsxes->appends(['searchText' => $searchText])->render() !!}
+                @else
+                    {!! $jrsxes->render() !!}
+                @endif
             </div>
         </div>
     </div>
@@ -117,8 +123,7 @@
                 <h3 class="panel-title">找找看</h3>
             </div>
             <div class="panel-body text-center">
-                <form method="POST" class="form-horizontal" action="{{ route('admin.jrsx.search') }}" >
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <form method="GET" class="form-horizontal" action="{{ route('admin.jrsx.search') }}" >
                     <div class="form-group ">
                         <label class="sr-only" for="searchText">搜索的关键字</label>
                         <input type="text" class="form-control" id="searchText" name="searchText" placeholder="请输入要搜索的关键字">
@@ -129,19 +134,18 @@
                 </form>
             </div>
         </div>
-        <div class="panel panel-default corner-radius">
+        <!-- <div class="panel panel-default corner-radius">
             <div class="panel-heading text-center">
                 <h3 class="panel-title">功能栏</h3>
             </div>
             <div class="panel-body">
                 <ul class="list">
-                  <li><a href="#">我的收藏</a></li>
-                  <li><a href="#">我的备注</a></li>
-                  <li><a href="#">禁止列表</a></li>
-                  <li><a href="#">返回首页</a></li>
+                  <li><a href="{{ route('admin.jrsx.fav') }}">我的收藏</a></li>
+                  <li><a href="{{ route('admin.jrsx.remark') }}">我的备注</a></li>
+                  <li><a href="{{ route('admin.jrsx.index') }}">返回首页</a></li>
                 </ul>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 @stop

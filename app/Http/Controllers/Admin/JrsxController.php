@@ -17,18 +17,24 @@ class JrsxController extends Controller
      */
     public function index()
     {
+        $searchText=null;
         $jrsxes = Jrsx::where('delflag',0)
                 ->orderBy('postdate', 'desc')
                 ->paginate(config('cms.posts_per_page'));
-        return view('admin.jrsx.index',compact('jrsxes'));
+        return view('admin.jrsx.index',compact('jrsxes','searchText'));
     }
 
-    public function fav()
-    {
+    public function fav()    {
+
         $jrsxes = Jrsx::where('delflag',0)
                 ->orderBy('postdate', 'desc')
                 ->paginate(config('cms.posts_per_page'));
         return view('admin.jrsx.fav',compact('jrsxes'));
+    }
+
+    public function addFav(Request $request,$jrsxid,$userid)
+    {
+
     }
 
     public function remark()
@@ -62,9 +68,8 @@ class JrsxController extends Controller
      */
     public function show($id)
     {
-        $jrsx = ChaoSky::where('id',$id)->where('delflag',0)->first();
-
-        return view('admin.jrsx.jrsx')->withPost($jrsx);
+        $jrsx = Jrsx::where('id',$id)->where('delflag',0)->first();
+        return view('admin.jrsx.jrsx')->withJrsx($jrsx);
     }
 
 
@@ -97,9 +102,9 @@ class JrsxController extends Controller
     {
         $searchText = $request->searchText;
         $jrsxes = Jrsx::where('delflag',0)
-                            ->where('username', 'like', '%'.$request->searchText.'%')
-                            ->orwhere('dh', 'like', '%'.$request->searchText.'%')
-                            ->orwherein('comments','like', '%'.$request->searchText.'%')
+                            ->where('username', 'like', '%'.$searchText.'%')
+                            ->orwhere('dh', 'like', '%'.$searchText.'%')
+                            ->orwhere('comments','like', '%'.$searchText.'%')
                             ->orderBy('postdate', 'desc')
                             ->paginate(config('cms.posts_per_page'));
 

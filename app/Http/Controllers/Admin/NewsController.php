@@ -26,10 +26,11 @@ class NewsController extends Controller
      */
     public function index()
     {
+        $searchText=null;
         $chaoSkies = ChaoSky::where('delflag',0)
                 ->orderBy('stime', 'desc')
                 ->paginate(config('cms.posts_per_page'));
-        return view('admin.news.index',compact('chaoSkies'));
+        return view('admin.news.index',compact('chaoSkies','searchText'));
     }
 
     /**
@@ -169,6 +170,7 @@ class NewsController extends Controller
      */
     public function search(Request $request)
     {
+        $searchText = $request->searchText;
         $pros=ChaoPro::where('proname','like', '%'.$request->searchText.'%')->get();
         $users=User::where('name','like', '%'.$request->searchText.'%')->get();
 
@@ -183,13 +185,13 @@ class NewsController extends Controller
         }
 
         $chaoSkies = ChaoSky::where('delflag',0)
-                            ->where('tiptitle', 'like', '%'.$request->searchText.'%')
-                            ->orwhere('tipcontent', 'like', '%'.$request->searchText.'%')
+                            ->where('tiptitle', 'like', '%'.$searchText.'%')
+                            ->orwhere('tipcontent', 'like', '%'.$searchText.'%')
                             ->orwherein('proid',$proids)
                             ->orwherein('userid',$userids)
                             ->orderBy('stime', 'desc')
                             ->paginate(config('cms.posts_per_page'));
 
-        return view('admin.news.index',compact('chaoSkies'));
+        return view('admin.news.index',compact('chaoSkies','searchText'));
     }
 }

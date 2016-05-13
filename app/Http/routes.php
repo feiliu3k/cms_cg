@@ -45,15 +45,17 @@ $router->group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     resource('admin/permission','PermissionController');
     resource('admin/resource','ResourceController');
 
-    post('admin/jrsx/search',['uses'=>'JrsxController@search','as'=>'admin.jrsx.search']);
+    get('admin/jrsx/search',['uses'=>'JrsxController@search','as'=>'admin.jrsx.search']);
+    get('admin/jrsx/fav',['uses'=>'JrsxController@fav','as'=>'admin.jrsx.fav']);
+    get('admin/jrsx/remark',['uses'=>'JrsxController@remark','as'=>'admin.jrsx.remark']);
     resource('admin/jrsx','JrsxController');
 
-    post('admin/news/search',['uses'=>'NewsController@search','as'=>'admin.news.search']);
+    get('admin/news/search',['uses'=>'NewsController@search','as'=>'admin.news.search']);
     resource('admin/news', 'NewsController', ['except' => 'show']);
 
     resource('admin/pro', 'ProController',['except' => 'show']);
 
-    post('admin/comment/search',['uses'=>'CommentController@search','as'=>'admin.comment.search']);
+    get('admin/comment/search',['uses'=>'CommentController@search','as'=>'admin.comment.search']);
     resource('admin/comment', 'CommentController', ['except' => 'show']);
 
 

@@ -19,11 +19,11 @@ class CommentController extends Controller
      */
     public function index()
     {
-
+        $searchText=null;
         $chaoComments = ChaoComment::where('delflag',0)
                 ->orderBy('ctime', 'desc')
                 ->paginate(config('cms.posts_per_page'));
-        return view('admin.comment.index',compact('chaoComments'));
+        return view('admin.comment.index',compact('chaoComments','searchText'));
     }
 
     /**
@@ -108,19 +108,20 @@ class CommentController extends Controller
 
     public function search(Request $request)
     {
+        $searchText=$request->searchText;
         $chaoSkies=ChaoSky::where('delflag',0)->where('tiptitle', 'like', '%'.$request->searchText.'%')->get();
         $chaoSkyids=array();
         foreach ($chaoSkies as $chaoSky) {
             array_push($chaoSkyids, $chaoSky->tipid);
         }
         $chaoComments = ChaoComment::where('delflag',0)
-                            ->where('userip', 'like', '%'.$request->searchText.'%')
-                            ->orwhere('comment', 'like', '%'.$request->searchText.'%')
+                            ->where('userip', 'like', '%'.$searchText.'%')
+                            ->orwhere('comment', 'like', '%'.$searchText.'%')
                             ->orwherein('tipid',$chaoSkyids)
                             ->orderBy('ctime', 'desc')
                             ->paginate(config('cms.posts_per_page'));
 
-        return view('admin.comment.index',compact('chaoComments'));
+        return view('admin.comment.index',compact('chaoComments','searchText'));
     }
 
 
