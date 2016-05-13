@@ -71,7 +71,7 @@
                  </div>
             </div>
         </div>
-
+         <input type="hidden" class="form-control" name="readnum" autofocus id="readnum" value="{{ $readnum }}">
         <div class="form-group">
             <label for="proid" class="col-md-3 control-label">
                 栏目

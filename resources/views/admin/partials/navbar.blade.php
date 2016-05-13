@@ -6,6 +6,11 @@
             <a href="{{ url('admin/news') }}">{{ config('cms.title') }}</a>
         </li>
         @endcan
+        @can('edit-jrsx')
+        <li @if (Request::is('admin/jrsx*')) class="active" @endif>
+            <a href="{{ url('admin/jrsx') }}">{{ config('cms.jrsx.jrsx') }}</a>
+        </li>
+        @endcan
         @can('edit-pro')
         <li @if (Request::is('admin/pro*')) class="active" @endif>
             <a href="{{ url('admin/pro') }}">{{ config('cms.pro') }}</a>

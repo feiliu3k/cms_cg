@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 return [
         'title' => '城管信息',
         'pro' => '板块',
@@ -10,6 +10,14 @@ return [
             'storage' => 'local',
             'webpath' => '/uploads',
         ],
+
         'news_image_path'=>'../../uploads/cg/',
         'news_video_path'=>'../../uploads/cg/',
+
+        'jrsx' => [
+            'jrsx' => '报料',
+            'imagePath'=>'http://localhost/',
+            'videoPath'=>'http://localhost/',
+        ],
+
 ];

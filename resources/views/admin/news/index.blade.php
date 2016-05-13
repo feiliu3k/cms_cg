@@ -14,8 +14,7 @@
     </div>
     <div class="row">
         <div class="panel panel-body">
-            <form method="POST" action="{{ route('admin.news.search') }}" class="form-inline">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <form method="GET" action="{{ route('admin.news.search') }}" class="form-inline">
                 <div class="form-group-lg col-md-offset-3 col-md-4">
                     <label class="sr-only" for="searchText">搜索的关键字</label>
                     <input type="text" class="form-control" style="width:100%" id="searchText" name="searchText" placeholder="请输入要搜索的关键字">
@@ -89,7 +88,11 @@
             </tbody>
             </table>
             <div class="pull-right">
-                {!! $chaoSkies->render() !!}
+                @if ($searchText)
+                    {!! $chaoSkies->appends(['searchText' => $searchText])->render() !!}
+                @else
+                    {!! $chaoSkies->render() !!}
+                @endif
             </div>
         </div>
     </div>
