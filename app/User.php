@@ -94,13 +94,23 @@ class User extends Model implements AuthenticatableContract,
         );
     }
 
-    public function resources()
-    {
-        return $this->belongsToMany(Resource::class);
-    }
-
     public function jrsxes()
     {
-        return $this->hasMany('App\Jrsx','jrsxfav','id','userid');
+       return $this->belongsToMany('App\Jrsx','jrsxfav','userid','jrsxid');
+    }
+
+    public function jrsxRemarks()
+    {
+        return $this->hasMany('App\JrsxRemark','userid','id');
+    }
+
+    public function chaoDep()
+    {
+       return $this->belongsTo('App\ChaoDep','dep_user','userid','depid');
+    }
+
+    public function chaoPros()
+    {
+       return $this->belongsToMany('App\ChaoPro','pro_user','userid','proid');
     }
 }

@@ -32,4 +32,13 @@ class ChaoPro extends Model
         return $this->hasMany('App\ChaoSky','proid','id');
     }
 
+    public function chaoDep()
+    {
+        return $this->belongsTo('App\ChaoDep','proid','id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User','pro_user','proid','userid');
+    }
 }
