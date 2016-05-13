@@ -10,6 +10,6 @@ return [
             'storage' => 'local',
             'webpath' => '/uploads',
         ],
-        'news_image_path'=>'../../uploads/',
-        'news_video_path'=>'../../uploads/',
+        'news_image_path'=>'../../uploads/cg/',
+        'news_video_path'=>'../../uploads/cg/',
 ];
