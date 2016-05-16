@@ -56,7 +56,7 @@ class ChaoSky extends Model
     protected $dates = ['stime'];
 
     protected $fillable = [
-        'tiptitle', 'tipimg1','tipcontent','tipvideo','readnum','commentflag','draftflag','stime'
+        'tiptitle', 'tipimg1','tipcontent','tipvideo','readnum','commentflag','draftflag','stime','proid',
     ];
 
 
