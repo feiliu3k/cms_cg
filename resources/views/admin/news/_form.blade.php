@@ -79,9 +79,15 @@
             <div class="col-md-8">
                 <select name="proid" id="proid" class="form-control" >
                 @foreach ($pros as $pro)
-                        <option value="{{ $pro->id }}">
-                            {{ $pro->proname }}
-                        </option>
+                    @if ($proid==$pro->id)
+                    <option value="{{ $pro->id }} " selected="selected">
+                        {{ $pro->proname }}
+                    </option>
+                    @else
+                    <option value="{{ $pro->id }} ">
+                        {{ $pro->proname }}
+                    </option>
+                    @endif
                 @endforeach
                 </select>
             </div>
