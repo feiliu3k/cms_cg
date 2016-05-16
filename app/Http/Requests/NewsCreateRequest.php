@@ -51,6 +51,7 @@ class NewsCreateRequest extends Request
             'draftflag'=>$this->draftflag,
             'stime' => $published_at,
             'readnum' => $this->readnum,
+            'proid' => $this->proid,
         ];
     }
 }
