@@ -16,8 +16,8 @@ return [
 
         'jrsx' => [
             'jrsx' => '报料',
-            'imagePath'=>'http://localhost/',
-            'videoPath'=>'http://localhost/',
+            'imagePath'=>'http://olive.strtv.cn:7337/cg/',
+            'videoPath'=>'http://olive.strtv.cn:7337/cg/',
         ],
 
 ];
