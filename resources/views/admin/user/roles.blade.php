@@ -22,7 +22,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('admin/user/updateRole', $user->id) }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="id" value="{{ $user->id }}">
-                        <table id="roless-table" class="table table-striped">
+                        <table id="roles-table" class="table table-striped">
                         <thead>
                             <tr>
                                 <th></th>
@@ -73,4 +73,14 @@
 </div>
 
 
+@stop
+
+@section('scripts')
+<script>
+    // $(function() {
+    //     $("#roles-table").DataTable({
+    //         order: [[0, "desc"]]
+    //     });
+    // });
+</script>
 @stop

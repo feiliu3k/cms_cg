@@ -11,11 +11,6 @@
             <a href="{{ url('admin/jrsx') }}">{{ config('cms.jrsx.jrsx') }}</a>
         </li>
         @endcan
-        @can('edit-pro')
-        <li @if (Request::is('admin/pro*')) class="active" @endif>
-            <a href="{{ url('admin/pro') }}">{{ config('cms.pro') }}</a>
-        </li>
-        @endcan
         @can('edit-comment')
         <li @if (Request::is('admin/comment*')) class="active" @endif>
             <a href="{{ url('admin/comment') }}">{{ config('cms.comment') }}</a>
@@ -25,22 +20,24 @@
     @endif
 </ul>
 <ul class="nav navbar-nav nav-tabs">
- @if (Auth::check())
-  @can('edit-user')
+    @if (Auth::check())
+        @can('edit-user')
+        <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          系统工具 <span class="caret"></span>
+        </a>
 
-  <li role="presentation" class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-      系统工具 <span class="caret"></span>
-    </a>
+        <ul class="dropdown-menu">
+            <li><a href="{{ url('admin/dept') }}">单位</a></li>
+            <li><a href="{{ url('admin/pro') }}">栏目</a></li>
 
-    <ul class="dropdown-menu">
-        <li><a href="{{ url('admin/user') }}">用户</a></li>
-        <li><a href="{{ url('admin/role') }}">角色</a></li>
-        <li><a href="{{ url('admin/permission') }}">权限</a></li>
-    </ul>
-  </li>
-    @endcan
-  @endif
+            <li><a href="{{ url('admin/user') }}">用户</a></li>
+            <li><a href="{{ url('admin/role') }}">角色</a></li>
+            <li><a href="{{ url('admin/permission') }}">权限</a></li>
+        </ul>
+        </li>
+        @endcan
+    @endif
 </ul>
 
 

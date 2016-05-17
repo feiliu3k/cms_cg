@@ -25,11 +25,11 @@
                         <table id="pros-table" class="table table-striped">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th class="hidden-md"></th>
                                 <th class="hidden-md">编号</th>
                                 <th>名称</th>
-                                <th >报料</th>
-                                <th >缩略图</th>
+                                <th>报料</th>
+                                <th>缩略图</th>
                             </tr>
                         </thead>
                             <tbody>
@@ -81,4 +81,14 @@
 </div>
 
 
+@stop
+
+@section('scripts')
+<script>
+    // $(function() {
+    //     $("#pros-table").DataTable({
+    //         order: [[0, "desc"]]
+    //     });
+    // });
+</script>
 @stop
