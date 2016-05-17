@@ -34,6 +34,7 @@ class NewsController extends Controller
         }
         $chaoSkies = ChaoSky::where('delflag',0)
                 ->wherein('proid',$proids)
+                ->orwhere('userid',Auth::user()->id)
                 ->orderBy('stime', 'desc')
                 ->paginate(config('cms.posts_per_page'));
         return view('admin.news.index',compact('chaoSkies','searchText'));
@@ -192,6 +193,7 @@ class NewsController extends Controller
                 array_push($proids, $pro->id);
             }
         }
+
 
         $userids=array();
         foreach ($users as $user) {
