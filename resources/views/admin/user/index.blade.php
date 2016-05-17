@@ -25,6 +25,7 @@
                             <th>编号</th>
                             <th class="hidden-md">名称</th>
                             <th class="hidden-md">邮件</th>
+                            <th>单位</th>
                             <th data-sortable="false">操作</th>
                         </tr>
                      </thead>
@@ -34,12 +35,16 @@
                             <td>{{ $user->id }}</td>
                             <td class="hidden-md">{{ $user->name }}</td>
                             <td class="hidden-md">{{ $user->email }}</td>
+                            <td class="hidden-md">{{ $user->chaoDep->depname }}</td>
                             <td>
                                 <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-xs btn-info">
                                     <i class="fa fa-edit"></i> 编辑
                                 </a>
                                 <a href="{{ url('admin/user/editRole', $user->id) }}" class="btn btn-xs btn-info">
                                     <i class="fa fa-edit"></i> 角色
+                                </a>
+                                <a href="{{ url('admin/user/editPro', $user->id) }}" class="btn btn-xs btn-info">
+                                    <i class="fa fa-edit"></i> 栏目
                                 </a>
                             </td>
                         </tr>

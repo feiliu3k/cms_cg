@@ -17,7 +17,7 @@
             <form method="GET" action="{{ route('admin.news.search') }}" class="form-inline">
                 <div class="form-group-lg col-md-offset-3 col-md-4">
                     <label class="sr-only" for="searchText">搜索的关键字</label>
-                    <input type="text" class="form-control" style="width:100%" id="searchText" name="searchText" placeholder="请输入要搜索的关键字">
+                    <input type="text" class="form-control" style="width:100%" id="searchText" name="searchText" placeholder="请输入要搜索的关键字" value={{ $searchText }}>
                 </div>
                 <div class="form-group-lg col-md-2">
                     <button type="submit" class="btn btn-success form-control" ><i class="fa fa-search"></i> 搜索</button>

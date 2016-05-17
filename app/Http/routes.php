@@ -34,6 +34,9 @@ $router->group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     get('admin/user/editRole/{id}',['uses' => 'UserController@editRole', 'as' => 'admin.user.editRole']);
     post('admin/user/updateRole/{id}',['uses' => 'UserController@updateRole', 'as' => 'admin.user.updateRole']);
 
+    get('admin/user/editPro/{id}',['uses' => 'UserController@editPro', 'as' => 'admin.user.editPro']);
+    post('admin/user/updatePro/{id}',['uses' => 'UserController@updatePro', 'as' => 'admin.user.updatePro']);
+
     get('admin/role/editPermission/{id}',['uses' => 'RoleController@editPermission', 'as' => 'admin.role.editPermission']);
     post('admin/role/updatePermission/{id}',['uses' => 'RoleController@updatePermission', 'as' => 'admin.role.updatePermission']);
 
@@ -54,6 +57,7 @@ $router->group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     resource('admin/news', 'NewsController', ['except' => 'show']);
 
     resource('admin/pro', 'ProController',['except' => 'show']);
+    resource('admin/dept', 'DeptController',['except' => 'show']);
 
     get('admin/comment/search',['uses'=>'CommentController@search','as'=>'admin.comment.search']);
     resource('admin/comment', 'CommentController', ['except' => 'show']);

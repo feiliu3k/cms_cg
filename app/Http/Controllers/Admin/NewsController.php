@@ -27,7 +27,13 @@ class NewsController extends Controller
     public function index()
     {
         $searchText=null;
+        $pros=Auth::user()->ChaoPros;
+        $proids=array();
+        foreach ($pros as $pro) {
+            array_push($proids, $pro->id);
+        }
         $chaoSkies = ChaoSky::where('delflag',0)
+                ->wherein('proid',$proids)
                 ->orderBy('stime', 'desc')
                 ->paginate(config('cms.posts_per_page'));
         return view('admin.news.index',compact('chaoSkies','searchText'));
@@ -174,9 +180,17 @@ class NewsController extends Controller
         $pros=ChaoPro::where('proname','like', '%'.$request->searchText.'%')->get();
         $users=User::where('name','like', '%'.$request->searchText.'%')->get();
 
+        $ipros=Auth::user()->ChaoPros;
+        $iproids=array();
+        foreach ($ipros as $ipro) {
+            array_push($iproids, $ipro->id);
+        }
+
         $proids=array();
         foreach ($pros as $pro) {
-            array_push($proids, $pro->id);
+            if (in_array($pro->id, $iproids)){
+                array_push($proids, $pro->id);
+            }
         }
 
         $userids=array();

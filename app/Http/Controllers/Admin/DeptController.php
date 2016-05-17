@@ -6,22 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-use App\ChaoPro;
 use App\ChaoDep;
 
-use App\Http\Requests\ProCreateRequest;
-use App\Http\Requests\ProUpdateRequest;
-
-class ProController extends Controller
+class DeptController extends Controller
 {
-    protected $fields = [
-        'proid' => '',
-        'proname' => '',
-        'proimg' => '',
-        'depid'=>'',
-        'rebellion' =>'1',
 
+    protected $fields = [
+        'depname' => '',
+        'depid' => '',
     ];
     /**
      * Display a listing of the resource.
@@ -30,8 +22,8 @@ class ProController extends Controller
      */
     public function index()
     {
-        $pros = ChaoPro::all();
-        return view('admin.pro.index')->withPros($pros);
+        $depts = ChaoDep::all();
+        return view('admin.dept.index')->withDepts($depts);
     }
 
     /**
@@ -45,8 +37,8 @@ class ProController extends Controller
         foreach ($this->fields as $field => $default) {
             $data[$field] = old($field, $default);
         }
-        $data['depts']=ChaoDep::all();
-        return view('admin.pro.create', $data);
+
+        return view('admin.dept.create', $data);
     }
 
     /**
@@ -55,17 +47,18 @@ class ProController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProCreateRequest $request)
+    public function store(Request $request)
     {
-        $pro = new ChaoPro();
+        $dept = new ChaoDep();
         foreach (array_keys($this->fields) as $field) {
-            $pro->$field = $request->get($field);
+            $dept->$field = $request->get($field);
         }
-        $pro->save();
+        $dept->save();
 
-        return redirect('/admin/pro')
-                        ->withSuccess("栏目 '$pro->proname' 新建成功.");
+        return redirect('/admin/dept')
+                        ->withSuccess("栏目 '$dept->depname' 新建成功.");
     }
+
 
 
     /**
@@ -76,14 +69,13 @@ class ProController extends Controller
      */
     public function edit($id)
     {
-        $pro = ChaoPro::findOrFail($id);
+        $dept = ChaoDep::findOrFail($id);
         $data = ['id' => $id];
-        $data['depts']=ChaoDep::all();
         foreach (array_keys($this->fields) as $field) {
-            $data[$field] = old($field, $pro->$field);
+            $data[$field] = old($field, $dept->$field);
         }
 
-        return view('admin.pro.edit', $data);
+        return view('admin.dept.edit', $data);
     }
 
     /**
@@ -93,17 +85,17 @@ class ProController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $pro = ChaoPro::findOrFail($id);
+        $dept = ChaoDep::findOrFail($id);
 
         foreach (array_keys($this->fields) as $field) {
-            $pro->$field = $request->get($field);
+            $dept->$field = $request->get($field);
         }
 
-        $pro->save();
+        $dept->save();
 
-        return redirect("/admin/pro/$id/edit")
+        return redirect("/admin/dept")
                         ->withSuccess("更新成功.");
     }
 
@@ -115,10 +107,10 @@ class ProController extends Controller
      */
     public function destroy($id)
     {
-        $pro = ChaoPro::findOrFail($id);
-        $pro->delete();
+        $dept = ChaoDep::findOrFail($id);
+        $dept->delete();
 
-        return redirect('/admin/pro')
-                        ->withSuccess("'$pro->proname' .已经被删除.");
+        return redirect('/admin/dept')
+                        ->withSuccess("'$dept->depname' .已经被删除.");
     }
 }

@@ -106,11 +106,20 @@ class User extends Model implements AuthenticatableContract,
 
     public function chaoDep()
     {
-       return $this->belongsTo('App\ChaoDep','dep_user','userid','depid');
+       return $this->belongsTo('App\ChaoDep','dept_id','id');
     }
 
     public function chaoPros()
     {
-       return $this->belongsToMany('App\ChaoPro','pro_user','userid','proid');
+       return $this->belongsToMany('App\ChaoPro','pro_user','user_id','pro_id');
     }
+
+    // 给用户分配角色
+    public function assignPro($pro)
+    {
+        return $this->chaoPros()->save(
+            chaoPro::whereProname($pro)->firstOrFail()
+        );
+    }
+
 }

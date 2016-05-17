@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Hash, Input;
 use App\User;
 use App\Role;
+use App\ChaoDep;
+use App\ChaoPro;
 
 class UserController extends Controller
 {
@@ -30,8 +32,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        $depts=ChaoDep::all();
         $user=new User();
-        return view('admin.user.create',compact('user'));
+        return view('admin.user.create',compact('user','depts'));
     }
 
     /**
@@ -45,6 +48,7 @@ class UserController extends Controller
         $user = new User();
         $user->name=$request->name;
         $user->email=$request->email;
+        $user->dept_id= $request->dept_id;
         $user->password= Hash::make($request->newPassword);
         $user->save();
 
@@ -62,8 +66,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $depts=ChaoDep::all();
         $user = User::findOrFail($id);
-        return view('admin.user.edit', compact('user'));
+        return view('admin.user.edit', compact('user','depts'));
     }
 
 
@@ -80,6 +85,7 @@ class UserController extends Controller
 
         $user->name=$request->name;
         $user->email=$request->email;
+        $user->dept_id= $request->dept_id;
 
         $user->save();
 
@@ -160,6 +166,42 @@ class UserController extends Controller
         if (count($roleids)>0){
             foreach ($roleids as $roleid){
                 $user->assignRole(Role::findOrFail($roleid)->name);
+            }
+        }
+        return redirect('/admin/user')
+                        ->withSuccess("用户 '$user->name' .角色更改成功！");
+
+    }
+
+
+    public function editPro($id)
+    {
+        $user = User::findOrFail($id);
+        $up=$user->chaoPros;
+        $userpros=array();
+        foreach ($up as $pro){
+            $pid=$pro->id;
+            array_push($userpros,$pid);
+        }
+
+        $pros = ChaoPro::all();
+
+        return view('admin.user.pros', ['user'=>$user,'userpros'=>$userpros,'pros'=>$pros]);
+    }
+
+
+    public function updatePro(Request $request,$id)
+    {
+        //dd($request->permissions);
+        $user = User::findOrFail($id);
+        $proids=$request->pros;
+
+        $userProids=array();
+        $user->chaoPros()->detach();
+
+        if (count($proids)>0){
+            foreach ($proids as $proid){
+                $user->assignPro(ChaoPro::findOrFail($proid)->proname);
             }
         }
         return redirect('/admin/user')

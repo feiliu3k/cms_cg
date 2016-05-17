@@ -28,6 +28,27 @@
 </div>
 
 <div class="form-group">
+    <label for="proid" class="col-md-3 control-label">
+        单位
+    </label>
+    <div class="col-md-8">
+        <select name="depid" id="depid" class="form-control" >
+        @foreach ($depts as $dept)
+            @if ($depid==$dept->id)
+            <option value="{{ $dept->id }} " selected="selected">
+                {{ $dept->depname }}
+            </option>
+            @else
+            <option value="{{ $dept->id }} ">
+                {{ $dept->depname }}
+            </option>
+            @endif
+        @endforeach
+        </select>
+    </div>
+</div>
+
+<div class="form-group">
     <label for="proimg" class="col-md-3 control-label">
         {{ config('cms.pro') }}缩略图
     </label>

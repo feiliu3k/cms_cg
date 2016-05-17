@@ -15,3 +15,24 @@
         <input type="email" class="form-control" name="email" id="email" value="{{ $user->email }}">
     </div>
 </div>
+
+<div class="form-group">
+    <label for="proid" class="col-md-3 control-label">
+        单位
+    </label>
+    <div class="col-md-8">
+        <select name="dept_id" id="dept_id" class="form-control" >
+        @foreach ($depts as $dept)
+            @if ($user->dept_id==$dept->id)
+            <option value="{{ $dept->id }} " selected="selected">
+                {{ $dept->depname }}
+            </option>
+            @else
+            <option value="{{ $dept->id }} ">
+                {{ $dept->depname }}
+            </option>
+            @endif
+        @endforeach
+        </select>
+    </div>
+</div>

@@ -4,6 +4,7 @@ return [
         'pro' => '板块',
         'comment' => '评论',
         'upload' => '上传',
+        'dept' => '单位',
         'posts_per_page' => 20,
         'page_image'=>'',
         'uploads' => [

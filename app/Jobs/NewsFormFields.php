@@ -5,6 +5,7 @@ use App\ChaoSky;
 
 use App\ChaoPro;
 use Carbon\Carbon;
+use Auth;
 use Illuminate\Contracts\Bus\SelfHandling;
 class NewsFormFields extends Job implements SelfHandling
 {
@@ -61,7 +62,7 @@ class NewsFormFields extends Job implements SelfHandling
         }
         return array_merge(
             $fields,
-            ['pros' => ChaoPro::all()]
+            ['pros' => Auth::user()->chaoPros]
         );
     }
     /**
