@@ -92,7 +92,7 @@ class NewsController extends Controller
 
         return redirect()
                         ->route('admin.news.index')
-                        ->withSuccess('新闻添加成功.');
+                        ->withSuccess('文章添加成功.');
 
     }
 
@@ -140,16 +140,16 @@ class NewsController extends Controller
         if ($request->action === 'continue') {
             // return redirect()
             //                 ->back()
-            //                 ->withSuccess('新闻保存成功.');
+            //                 ->withSuccess('文章保存成功.');
 
             return redirect()
                             ->route('admin.news.edit', $next)
-                            ->withSuccess('新闻保存成功.');
+                            ->withSuccess('文章保存成功.');
         }
 
         return redirect()
                         ->route('admin.news.index')
-                        ->withSuccess('新闻保存成功.');
+                        ->withSuccess('文章保存成功.');
     }
 
     /**
@@ -166,7 +166,7 @@ class NewsController extends Controller
         $post->save();
         return redirect()
                         ->route('admin.news.index')
-                        ->withSuccess('新闻删除成功.');
+                        ->withSuccess('文章删除成功.');
     }
 
     /**
