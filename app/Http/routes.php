@@ -46,7 +46,7 @@ $router->group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     resource('admin/user','UserController');
     resource('admin/role','RoleController');
     resource('admin/permission','PermissionController');
-    resource('admin/resource','ResourceController');
+
 
     get('admin/jrsx/search',['uses'=>'JrsxController@search','as'=>'admin.jrsx.search']);
     get('admin/jrsx/fav',['uses'=>'JrsxController@fav','as'=>'admin.jrsx.fav']);

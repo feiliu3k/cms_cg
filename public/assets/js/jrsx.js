@@ -6,15 +6,17 @@ $(function(){
             var page=$(this).attr("data-page");
             var condition=$(this).attr("data-condition");
 
-            var url="src/jrsxdele.php";
+            var url="{{ route('admin.jrsx.destroy') }}";
 
             $.post(url,
                 {
-                    jrsxid:jrsxid,
+                    "_token" : {{ csrf_token() }},
+                    "_method" : "DELETE",
+                    "jrsxid" : jrsxid,
                 },
                 function(data,status){
                     if (data==="success"){
-                        window.location.href="jrsx.php?page="+page+"&"+condition;
+                        window.location.href={{ route('admin.jrsx.index') }};
                     }else{
                         alert("删除失败");
                     }

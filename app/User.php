@@ -114,11 +114,19 @@ class User extends Model implements AuthenticatableContract,
        return $this->belongsToMany('App\ChaoPro','pro_user','user_id','pro_id');
     }
 
-    // 给用户分配角色
+    // 给用户分配栏目
     public function assignPro($pro)
     {
         return $this->chaoPros()->save(
             chaoPro::whereProname($pro)->firstOrFail()
+        );
+    }
+
+    // 给用户分配栏目
+    public function fav($jrsxid)
+    {
+        return $this->jrsxes()->save(
+            Jrsx::find($jrsxid)
         );
     }
 

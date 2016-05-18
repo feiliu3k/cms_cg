@@ -19,20 +19,6 @@
                         </a>
                         <span class="divider"></span>
                     </li>
-
-                   <!--  <li>
-                        <a href="#" >
-                            <i class="glyphicon glyphicon-ok"> </i> 随手拍
-                        </a>
-                        <span class="divider"></span>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-thumbs-up"> </i> 微报料
-                        </a>
-                        <span class="divider"></span>
-                    </li> -->
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -45,7 +31,7 @@
                                 <a href="#">
                                     <i class="glyphicon glyphicon-thumbs-up"> </i>
                                     @if (($jrsx->f1)==1)
-                                        新闻报料
+                                        报料
                                     @elseif (($jrsx->f1)==2)
                                         随手拍
                                     @elseif (($jrsx->f1)==3)
@@ -57,7 +43,7 @@
                             </div>
                             <div class="infos">
                                 <div class="media-heading">
-                                    <a href="#" >
+                                    <a href="{{ route('admin.jrsx.show', $jrsx->id) }}" >
                                         {{ $jrsx->comments }}
                                     </a>
                                 </div>
@@ -96,11 +82,19 @@
                                 </div>
 
 
-                                <!-- <div class="media-command">
-                                    <a href="#" class="btn btn-primary btn-xs">备注</a>
-                                    <button type="button" data-jrsxid="#"  data-page="#" class="btn btn-success btn-xs btn-fav">收藏</button>
-                                    <button type="button" data-jrsxid="#"  data-page="#" data-condition="#" class="btn btn-danger btn-xs btn-delete">删除</button>
-                                </div> -->
+
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal-jrsx-remark">
+                                        <i class="fa fa-plus-circle"></i> 备注
+                                    </button>
+                                    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#modal-jrsx-fav">
+                                        <i class="fa fa-plus-circle"></i> 收藏
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#modal-jrsx-delete">
+                                        <i class="fa fa-times-circle fa-lg"></i> 删除
+                                    </button>
+                                </div>
+
                             </div>
                         </li>
                     @endforeach
@@ -134,7 +128,7 @@
                 </form>
             </div>
         </div>
-        <!-- <div class="panel panel-default corner-radius">
+        <div class="panel panel-default corner-radius">
             <div class="panel-heading text-center">
                 <h3 class="panel-title">功能栏</h3>
             </div>
@@ -145,22 +139,29 @@
                   <li><a href="{{ route('admin.jrsx.index') }}">返回首页</a></li>
                 </ul>
             </div>
-        </div> -->
+        </div>
     </div>
 </div>
+@include('admin.jrsx._modals')
 @stop
-
 @section('scripts')
 <script src="{{ URL::asset('assets/js/lightbox.js') }}"></script>
 <script src="{{ URL::asset('assets/js/videobox.js') }}"></script>
 <script src="{{ URL::asset('assets/js/jrsx.js') }}"></script>
 <script>
+    // 确认收藏
+    function fav_jrsx(name) {
+        $("#modal-jrsx-fav").modal("show");
+    }
+
+    // 确认删除
+    function delete_jrsx(name) {
+        $("#modal-jrsx-delete").modal("show");
+    }
+
     $(function() {
         var lightbox = new LightBox();
         var videobox = new VideoBox();
-        // $("#posts-table").DataTable({
-        //     order: [[0, "desc"]]
-        // });
     });
 </script>
 @stop

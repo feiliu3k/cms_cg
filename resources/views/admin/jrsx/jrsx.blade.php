@@ -104,9 +104,7 @@
                 </ul>
             </div>
 
-            <div class="panel-footer text-right">
-                {!! $jrsxes->render() !!}
-            </div>
+
         </div>
     </div>
     <div class="col-md-2 side-bar">
@@ -133,10 +131,9 @@
             </div>
             <div class="panel-body">
                 <ul class="list">
-                  <li><a href="#">我的收藏</a></li>
-                  <li><a href="#">我的备注</a></li>
-                  <li><a href="#">禁止列表</a></li>
-                  <li><a href="#">返回首页</a></li>
+                  <li><a href="{{ route('admin.jrsx.fav') }}">我的收藏</a></li>
+                  <li><a href="{{ route('admin.jrsx.remark') }}">我的备注</a></li>
+                  <li><a href="{{ route('admin.jrsx.index') }}">返回首页</a></li>
                 </ul>
             </div>
         </div>

@@ -46,11 +46,11 @@ CREATE TABLE `chaodep` (
   `depname` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '单位名称',
   `depid` int(4) DEFAULT NULL COMMENT '单位序号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `chaodep` */
 
-insert  into `chaodep`(`id`,`depname`,`depid`) values (1,'汕头城管',1);
+insert  into `chaodep`(`id`,`depname`,`depid`) values (1,'汕头城管',1),(5,'橄榄台',2);
 
 /*Table structure for table `chaopro` */
 
@@ -64,11 +64,11 @@ CREATE TABLE `chaopro` (
   `depid` int(11) DEFAULT '1' COMMENT '关联表chaodep的id项',
   `rebellion` int(11) DEFAULT '1' COMMENT '是否有报料功能（1为无，2为有）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `chaopro` */
 
-insert  into `chaopro`(`id`,`proid`,`proname`,`proimg`,`created_at`,`updated_at`,`depid`,`rebellion`) values (7,7,'城管呾你知',NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(8,8,'图说城管',NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(9,9,'城管动态',NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(10,10,'通告公告',NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(11,11,'法律法规',NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(12,12,'政民互动','','2016-05-12 15:22:00','2016-05-12 15:22:00',1,2);
+insert  into `chaopro`(`id`,`proid`,`proname`,`proimg`,`created_at`,`updated_at`,`depid`,`rebellion`) values (7,7,'城管呾你知','','0000-00-00 00:00:00','2016-05-13 14:57:02',1,NULL),(8,8,'图说城管',NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(9,9,'城管动态',NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(10,10,'通告公告',NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(11,11,'法律法规',NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(12,12,'政民互动','','2016-05-12 15:22:00','2016-05-12 15:22:00',1,2),(13,13,'ABC','','2016-05-17 15:26:25','2016-05-17 15:34:13',5,2);
 
 /*Table structure for table `chaosky` */
 
@@ -105,7 +105,7 @@ CREATE TABLE `chaosky` (
 
 /*Data for the table `chaosky` */
 
-insert  into `chaosky`(`tipid`,`tiptitle`,`tipimg1`,`tipcontent`,`stime`,`postflag`,`posttime`,`userid`,`post_user`,`readnum`,`proid`,`tipvideo`,`commentflag`,`delflag`,`draftflag`,`created_at`,`updated_at`) values (454,'2323','CEXwz0NHqsfi3JTS.jpg','<p><span style=\"font-family: 微软雅黑;\">23232323</span><br/></p>','2016-05-12 15:56:33',0,NULL,1,NULL,1,8,'',0,0,0,'2016-05-12 15:56:48','2016-05-12 15:56:48');
+insert  into `chaosky`(`tipid`,`tiptitle`,`tipimg1`,`tipcontent`,`stime`,`postflag`,`posttime`,`userid`,`post_user`,`readnum`,`proid`,`tipvideo`,`commentflag`,`delflag`,`draftflag`,`created_at`,`updated_at`) values (454,'2323','CEXwz0NHqsfi3JTS.jpg','<p><span style=\"font-family: 微软雅黑;\"><span style=\"font-family: 微软雅黑;\"></span>23232323pp</span><br/></p>','2016-05-12 15:56:33',0,NULL,1,NULL,1,13,'',0,0,0,'2016-05-12 15:56:48','2016-05-17 16:38:53');
 
 /*Table structure for table `jrsx` */
 
@@ -208,33 +208,20 @@ CREATE TABLE `permissions` (
 
 insert  into `permissions`(`id`,`name`,`label`,`description`,`created_at`,`updated_at`) values (3,'edit-user','edit-user','edit-user','2016-04-26 09:30:22','2016-04-26 09:30:22'),(4,'create-user','create-user','create-user','2016-04-26 09:30:44','2016-04-26 09:30:44'),(5,'delete-user','delete-user','delete-user','2016-04-26 09:31:06','2016-04-26 09:31:06'),(6,'list-user','list-user','list-user','2016-04-26 09:31:22','2016-04-26 09:31:22'),(7,'list-role','list-role','list-role','2016-04-26 09:31:40','2016-04-26 09:31:40'),(8,'create-role','create-role','create-role','2016-04-26 09:31:58','2016-04-26 09:31:58'),(9,'edit-role','edit-role','edit-role','2016-04-26 09:32:13','2016-04-26 09:32:13'),(10,'delete-role','delete-role','delete-role','2016-04-26 09:32:28','2016-04-26 09:32:28'),(11,'list-permission','list-permission','list-permission','2016-04-26 09:33:10','2016-04-26 09:33:10'),(12,'create-permission','create-permission','create-permission','2016-04-26 09:33:28','2016-04-26 09:33:28'),(13,'edit-permission','edit-permission','edit-permission','2016-04-26 09:33:45','2016-04-26 09:33:45'),(15,'delete-permission','delete-permission','delete-permission','2016-04-26 09:35:01','2016-04-26 09:35:01'),(16,'create-post','create-post','create-post','2016-04-26 09:41:26','2016-04-26 09:41:26'),(17,'edit-post','edit-post','edit-post','2016-04-26 09:41:42','2016-04-26 09:41:42'),(18,'delete-post','delete-post','delete-post','2016-04-26 09:42:04','2016-04-26 09:42:04'),(19,'list-post','list-post','list-post','2016-04-26 09:42:17','2016-04-26 09:42:17'),(20,'upload','upload','upload','2016-04-26 09:42:37','2016-04-26 09:42:37'),(21,'list-pro','list-pro','list-pro','2016-04-26 09:42:50','2016-04-26 09:42:50'),(22,'create-pro','create-pro','create-pro','2016-04-26 09:43:38','2016-04-26 09:43:38'),(23,'edit-pro','edit-pro','edit-pro','2016-04-26 09:43:52','2016-04-26 09:43:52'),(24,'delete-pro','delete-pro','delete-pro','2016-04-26 09:44:05','2016-04-26 09:44:05'),(25,'list-comment','list-comment','list-comment','2016-04-26 09:44:24','2016-04-26 09:44:24'),(26,'create-comment','create-comment','create-comment','2016-04-26 09:44:40','2016-04-26 09:44:40'),(27,'edit-comment','edit-comment','edit-comment','2016-04-26 09:44:53','2016-04-26 09:44:53'),(28,'delete-comment','delete-comment','delete-comment','2016-04-26 09:45:14','2016-04-26 09:45:14'),(29,'list-jrsx','list-jrsx','list-jrsx','2016-05-13 09:45:38','2016-05-13 09:45:38'),(30,'create-jrsx','create-jrsx','create-jrsx','2016-05-13 09:45:55','2016-05-13 09:45:55'),(31,'edit-jrsx','edit-jrsx','edit-jrsx','2016-05-13 09:46:07','2016-05-13 09:46:07'),(32,'delete-jrsx','delete-jrsx','delete-jrsx','2016-05-13 09:46:22','2016-05-13 09:46:22');
 
-/*Table structure for table `resource_user` */
+/*Table structure for table `pro_user` */
 
-CREATE TABLE `resource_user` (
+CREATE TABLE `pro_user` (
   `user_id` int(10) unsigned NOT NULL,
-  `resource_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`resource_id`,`user_id`),
-  KEY `resource_user_user_id_foreign` (`user_id`),
-  CONSTRAINT `resource_user_resource_id_foreign` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `resource_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+  `pro_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`pro_id`,`user_id`),
+  KEY `pro_user_user_id_foreign` (`user_id`),
+  CONSTRAINT `pro_user_pro_id_foreign` FOREIGN KEY (`pro_id`) REFERENCES `chaopro` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pro_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-/*Data for the table `resource_user` */
+/*Data for the table `pro_user` */
 
-/*Table structure for table `resources` */
-
-CREATE TABLE `resources` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `table_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `field_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `operator` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '=',
-  `field_value` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-/*Data for the table `resources` */
+insert  into `pro_user`(`user_id`,`pro_id`) values (1,7),(2,7),(1,8),(2,8),(1,9),(2,9),(1,10),(2,10),(2,11),(1,12),(2,12),(1,13);
 
 /*Table structure for table `role_user` */
 
@@ -249,7 +236,7 @@ CREATE TABLE `role_user` (
 
 /*Data for the table `role_user` */
 
-insert  into `role_user`(`user_id`,`role_id`) values (1,2),(2,3);
+insert  into `role_user`(`user_id`,`role_id`) values (1,2),(1,3);
 
 /*Table structure for table `roles` */
 
@@ -277,13 +264,16 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `dept_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
+  UNIQUE KEY `users_email_unique` (`email`),
+  KEY `fk_deptid` (`dept_id`),
+  CONSTRAINT `fk_deptid` FOREIGN KEY (`dept_id`) REFERENCES `chaodep` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`name`,`email`,`password`,`remember_token`,`created_at`,`updated_at`) values (1,'admin','admin@olive.cn','$2y$10$5pLo/xfwLIq6OwmltgM30eCCr7HgD4acQt9xkR6QFTkmel7p2o3sO','nYulCsLBhdxEX5YIq2m4KdgBFGscNJUr57xPfUppvciv3DoJgeISvy9Qy0g2','2016-04-11 12:42:54','2016-05-13 10:41:08'),(2,'user','','$2y$10$raFRlMQ4ILwdqQ72UGIO1OwBXq6RmjwKDYgfT8g7ukXqKx4h.zTpi',NULL,'2016-04-26 09:48:05','2016-05-11 15:34:01');
+insert  into `users`(`id`,`name`,`email`,`password`,`remember_token`,`created_at`,`updated_at`,`dept_id`) values (1,'admin','admin@olive.cn','$2y$10$5pLo/xfwLIq6OwmltgM30eCCr7HgD4acQt9xkR6QFTkmel7p2o3sO','nYulCsLBhdxEX5YIq2m4KdgBFGscNJUr57xPfUppvciv3DoJgeISvy9Qy0g2','2016-04-11 12:42:54','2016-05-17 14:19:25',5),(2,'user','uesr@qq.com','$2y$10$raFRlMQ4ILwdqQ72UGIO1OwBXq6RmjwKDYgfT8g7ukXqKx4h.zTpi',NULL,'2016-04-26 09:48:05','2016-05-17 14:17:16',1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
