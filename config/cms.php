@@ -1,7 +1,7 @@
 ﻿<?php
 return [
-        'title' => '城管信息',
-        'pro' => '板块',
+        'title' => '新闻',
+        'pro' => '栏目',
         'comment' => '评论',
         'upload' => '上传',
         'dept' => '单位',
@@ -20,5 +20,4 @@ return [
             'imagePath'=>'http://olive.strtv.cn:7337/cg/',
             'videoPath'=>'http://olive.strtv.cn:7337/cg/',
         ],
-
 ];
