@@ -57,8 +57,7 @@
                     </span>
                     •
                     <abbr>{{ $post->stime }}</abbr>
-                    •
-                    {{$post->readnum}} 阅读
+
                 </div>
             </div>
             <div class="panel-body">
