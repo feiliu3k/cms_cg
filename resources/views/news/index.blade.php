@@ -28,7 +28,6 @@
             <ul class="list-group" style="margin-bottom: 0;">
             @foreach ($posts as $post)
                 <li class="list-group-item">
-                    <span class="badge badge-reply-count">{{ $post->readnum }}</span>
                     <a href="{{ url('news',[$post->tipid]) }}" target="_blank">{{ $post->tiptitle }}</a>
                     <em>({{ $post->stime }})</em>
                 </li>
