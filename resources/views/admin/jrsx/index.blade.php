@@ -84,7 +84,7 @@
 
 
                                 <div class="col-md-6">
-                                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal-jrsx-remark">
+                                   <!--  <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal-jrsx-remark">
                                         <i class="fa fa-plus-circle"></i> 备注
                                     </button>
                                     <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#modal-jrsx-fav">
@@ -92,7 +92,7 @@
                                     </button>
                                     <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#modal-jrsx-delete">
                                         <i class="fa fa-times-circle fa-lg"></i> 删除
-                                    </button>
+                                    </button> -->
                                 </div>
 
                             </div>
@@ -134,9 +134,9 @@
             </div>
             <div class="panel-body">
                 <ul class="list">
-                  <li><a href="{{ route('admin.jrsx.fav') }}">我的收藏</a></li>
+                 <!--  <li><a href="{{ route('admin.jrsx.fav') }}">我的收藏</a></li>
                   <li><a href="{{ route('admin.jrsx.remark') }}">我的备注</a></li>
-                  <li><a href="{{ route('admin.jrsx.index') }}">返回首页</a></li>
+                  <li><a href="{{ route('admin.jrsx.index') }}">返回首页</a></li> -->
                 </ul>
             </div>
         </div>

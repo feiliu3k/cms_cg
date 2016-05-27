@@ -97,9 +97,9 @@
 
 
                                 <div class="media-command">
-                                    <a href="#" class="btn btn-primary btn-xs">备注</a>
+                                   <!--  <a href="#" class="btn btn-primary btn-xs">备注</a>
                                     <button type="button" data-jrsxid="#"  data-page="#" class="btn btn-success btn-xs btn-fav">收藏</button>
-                                    <button type="button" data-jrsxid="#"  data-page="#" data-condition="#" class="btn btn-danger btn-xs btn-delete">删除</button>
+                                    <button type="button" data-jrsxid="#"  data-page="#" data-condition="#" class="btn btn-danger btn-xs btn-delete">删除</button> -->
                                 </div>
                             </div>
                         </li>
@@ -136,9 +136,9 @@
             </div>
             <div class="panel-body">
                 <ul class="list">
-                  <li><a href="{{ route('admin.jrsx.fav') }}">我的收藏</a></li>
+                <!--   <li><a href="{{ route('admin.jrsx.fav') }}">我的收藏</a></li>
                   <li><a href="{{ route('admin.jrsx.remark') }}">我的备注</a></li>
-                  <li><a href="{{ route('admin.jrsx.index') }}">返回首页</a></li>
+                  <li><a href="{{ route('admin.jrsx.index') }}">返回首页</a></li> -->
                 </ul>
             </div>
         </div>
