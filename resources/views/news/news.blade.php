@@ -57,7 +57,6 @@
                     </span>
                     •
                     <abbr>{{ $post->stime }}</abbr>
-
                 </div>
             </div>
             <div class="panel-body">
