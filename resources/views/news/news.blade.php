@@ -57,6 +57,12 @@
                     </span>
                     •
                     <abbr>{{ $post->stime }}</abbr>
+                    @if (Auth::check())
+                        @can('list-readnum')
+                            •
+                            {{$post->readnum}} 阅读
+                        @endcan
+                    @endif
                 </div>
             </div>
             <div class="panel-body">
