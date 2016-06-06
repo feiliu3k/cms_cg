@@ -61,6 +61,11 @@ class ProController extends Controller
         foreach (array_keys($this->fields) as $field) {
             $pro->$field = $request->get($field);
         }
+
+        if (!$request->get('rebellion')){
+            $pro->rebellion=1;
+        }
+
         $pro->save();
 
         return redirect('/admin/pro')
