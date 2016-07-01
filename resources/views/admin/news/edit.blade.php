@@ -34,6 +34,9 @@
 
                         @include('admin.news._form')
 
+                        @include('admin.news._modals')
+
+
                         <div class="col-md-8">
                             <div class="form-group">
                                 <div class="col-md-10 col-md-offset-2">
@@ -114,7 +117,6 @@
     </div>
 </div>
 
-
 @stop
 
 @section('scripts')
@@ -148,7 +150,7 @@
             close: '关闭',
             firstDay: 1,
             format: 'yyyy 年 mm 月 dd 日',
-            formatSubmit: 'yyyy/mm/dd'
+            formatSubmit: 'yyyy-mm-dd'
         });
 
         jQuery.extend( jQuery.fn.pickatime.defaults, {
@@ -160,6 +162,36 @@
         });
         $("#publish_time").pickatime({
             format: "HH:i"
+        });
+
+        $("#vote_begin_date").pickadate({
+            format: "yyyy-mm-dd"
+        });
+        $("#vote_begin_time").pickatime({
+            format: "HH:i"
+        });
+
+        $("#vote_end_date").pickadate({
+            format: "yyyy-mm-dd"
+        });
+        $("#vote_end_time").pickatime({
+            format: "HH:i"
+        });
+
+        $('#btn_add_voteitem').on('click',function(){
+            $('#voteitems').append(' <div class="voteitem form-group"> <input name="voteitemids[]" type="hidden" value="0"> <label class="control-label"> 选项 </label> <input class="form-control" name="vote_items[]" type="text"> <label class="control-label"> 票数 </label> <input class="form-control" name="votecounts[]" type="text" value="0"> <button type="button" class="btn btn-xs btn-danger btn-remove-self"><i class="fa fa-times-circle fa-lg"></i></button></div> ');
+        });
+
+        $('#btn_empty_voteitem').on('click',function(){
+           $('#voteitems').empty();
+        });
+
+        $('#btn_remove_voteitem').on('click',function(){
+           $("#voteitems div:last").remove();
+        });
+
+        $('.form-group').delegate(".btn-remove-self","click",function(){
+            $(this).parent().remove();
         });
 
         //上传图片相关

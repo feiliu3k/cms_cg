@@ -31,7 +31,15 @@ class NewsFormFields extends Job implements SelfHandling
         'publish_date' => '',
         'publish_time' => '',
         'proid'=>'',
-        'pro'=>''
+        'pro'=>'',
+        'voteflag'=>'0',
+        'votenum'=>'1',
+        'vote_begin_date' => '',
+        'vote_begin_time' => '',
+        'vote_end_date' => '',
+        'vote_end_time' => '',
+        'vbtime'=>'',
+        'vetime'=>''
     ];
     /**
      * Create a new command instance.
@@ -56,6 +64,13 @@ class NewsFormFields extends Job implements SelfHandling
             $when = Carbon::now();
             $fields['publish_date'] = $when->format('Y-m-d');
             $fields['publish_time'] = $when->format('H:i:s');
+
+            $fields['vote_begin_date'] = $when->format('Y-m-d');
+            $fields['vote_begin_time'] = $when->format('H:i:s');
+
+            $fields['vote_end_date'] = $when->format('Y-m-d');
+            $fields['vote_end_time'] = $when->format('H:i:s');
+            $fields['voteItems'] =null;
         }
         foreach ($fields as $fieldName => $fieldValue) {
             $fields[$fieldName] = old($fieldName, $fieldValue);
@@ -63,6 +78,7 @@ class NewsFormFields extends Job implements SelfHandling
         return array_merge(
             $fields,
             ['pros' => Auth::user()->chaoPros]
+
         );
     }
     /**
@@ -75,12 +91,19 @@ class NewsFormFields extends Job implements SelfHandling
     protected function fieldsFromModel($tipid, array $fields)
     {
         $post = ChaoSky::findOrFail($tipid);
+        if(!$post->vbtime){
+            $post->vbtime=Carbon::now();
+        }
+        if(!$post->vetime){
+            $post->vetime=Carbon::now();
+        }
         $fieldNames = array_keys(array_except($fields, ['pro']));
         $fields = ['tipid' => $tipid];
         foreach ($fieldNames as $field) {
             $fields[$field] = $post->{$field};
         }
         $fields['pro'] = $post->chaoPro();
+        $fields['voteItems'] = $post->voteItems;
         return $fields;
     }
 }

@@ -32,6 +32,7 @@ class CommentController extends Controller
 
         $response = array(
             'status' => 0,
+            'verifyflag'=>$chaoComment->verifyflag,
             'msg' => '审核修改成功！',
         );
 

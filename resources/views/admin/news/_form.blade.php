@@ -83,6 +83,33 @@
             </div>
         </div>
         @endcan
+        <div class="form-group">
+            <div class="col-md-8 col-md-offset-3">
+                <div class="checkbox">
+               <!--      <label class="col-md-6">
+                        <input  type="checkbox" name="voteflag" value=1 @if ($voteflag==1) checked="checked" @endif >
+                        投票标志
+                    </label>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-vote-create">
+                    <i class="fa fa-upload"></i> 编辑投票功能
+                    </button >-->
+                    @if ($voteflag==1)
+                        @can('edit-vote')
+                            已有打开投票功能
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-vote-create">
+                            <i class="fa fa-upload"></i> 编辑投票功能
+                            </button>
+                        @endcan
+                     @else
+                        @can('create-vote')
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-vote-create">
+                            <i class="fa fa-upload"></i> 新建投票功能
+                             </button >
+                        @endcan
+                     @endif
+                 </div>
+            </div>
+        </div>
         @can('create-readnum')
         <div class="form-group">
            <label for="readnum" class="col-md-3 control-label">

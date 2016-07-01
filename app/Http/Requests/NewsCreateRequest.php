@@ -52,6 +52,10 @@ class NewsCreateRequest extends Request
             'stime' => $published_at,
             'readnum' => $this->readnum,
             'proid' => $this->proid,
+            'voteflag'=>$this->voteflag,
+            'votenum'=>$this->votenum,
+            'vbtime'=>new Carbon($this->vote_begin_date.' '.$this->vote_begin_time),
+            'vetime'=>new Carbon($this->vote_end_date.' '.$this->vote_end_time),
         ];
     }
 }

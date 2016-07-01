@@ -70,13 +70,33 @@
             </div>
         </div>
         <hr>
+        @can('list-vote')
+        @if ($post->voteflag==1)
+        <div class=" list-panel  panel panel-default">
+            <div class="panel-heading">
+                <div class="total">投票结果 </div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group row">
+                @foreach ($post->voteItems as $voteItem)
+                    <li class="list-group-item" style="margin-top: 0px;">
+                        选项:{{$voteItem->itemcontent}}
+                        <span class="badge">{{$voteItem->votecount}}</span>
+                    </li>
+                @endforeach
+                </ul>
+            </div>
+        </div>
+        <hr>
+        @endif
+        @endcan
         <div class=" list-panel  panel panel-default">
             <div class="panel-heading">
                 <div class="total">评论列表 </div>
             </div>
             <div class="panel-body">
                 <ul class="list-group row" >
-                @foreach ($post->comments as $comment)
+                @foreach ($post->comments()->orderby('ctime','desc')->paginate(config('cms.posts_per_page'))as $comment)
                 @if ($comment->delflag==0)
                 <li class="list-group-item media" style="margin-top: 0px;">
                     <div class="infos">
@@ -112,6 +132,7 @@
                 @endforeach
                 </ul>
             </div>
+            {!! $post->comments()->orderby('ctime','desc')->paginate(config('cms.posts_per_page'))->render() !!}
         </div>
     </div>
 @stop
@@ -121,6 +142,7 @@
 
         $(function(){
             $(".btn-delete").click(function(event) {
+                var _self=this;
                 var sure=confirm('你确定要删除吗?');
                 if (sure){
                     var cid=$(this).attr("data-cid");
@@ -135,8 +157,8 @@
                             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                         },
                         success: function(data){
-
-                            window.location.href='{{ url("/news") }}/'+tipid;
+                            $(_self).parents("li").remove();
+                            //window.location.href='{{ url("/news") }}/'+tipid;
                         },
                         error: function(xhr, type){
                             alert('删除评论失败！');
@@ -145,10 +167,9 @@
                 }
             });
             $(".btn-verify").click(function(event) {
-
+                var _self=this;
                 var cid=$(this).attr("data-cid");
                 var tipid=$(this).attr("data-tipid");
-
                 $.ajax({
                     type: 'POST',
                     url: '{{ url("/comment/verify") }}',
@@ -158,7 +179,12 @@
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                     },
                     success: function(data){
-                        window.location.href='{{ url("/news") }}/'+tipid;
+                        //window.location.href='{{ url("/news") }}/'+tipid;
+                       if(data.verifyflag===0){
+                            $(_self).html('<i class="fa fa-check-square-o"></i> 通过 ');
+                       }else{
+                            $(_self).html('<i class="fa fa-check-square-o"></i> 取消 ');
+                       }
                     },
                     error: function(xhr, type){
                         alert('审核修改失败！');

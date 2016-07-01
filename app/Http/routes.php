@@ -11,17 +11,27 @@
 |
 */
 
-get('/', function () {
-    return redirect('/news');
+get('png', function () {
+    ob_clean();
+    ob_start();
+    $im = @imagecreate(200, 50) or die("创建图像资源失败");
+    imagecolorallocate($im, 255, 255, 255);
+    $text_color = imagecolorallocate($im, 0, 0, 255);
+    imagestring($im, 5, 0, 0, "Hello world!", $text_color);
+    imagepng($im);
+    imagedestroy($im);
+    $content = ob_get_clean();
+    return response($content, 200, [
+        'Content-Type' => 'image/png',
+    ]);
 });
+
+get('/', 'NewsController@index');
 
 get('news', 'NewsController@index');
 get('news/{id}', ['uses' => 'NewsController@show', 'as' => 'newsShow']);
 
 // Admin area
-get('admin', function () {
-    return redirect('/admin/news');
-});
 
 post('/comment/destroy','CommentController@destroy');
 
@@ -30,6 +40,7 @@ post('/comment/verify', 'CommentController@verify');
 
 $router->group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
 
+    get('admin', 'NewsController@index');
     post('admin/user/change',['uses' => 'UserController@change', 'as' => 'admin.user.change']);
     get('admin/user/editRole/{id}',['uses' => 'UserController@editRole', 'as' => 'admin.user.editRole']);
     post('admin/user/updateRole/{id}',['uses' => 'UserController@updateRole', 'as' => 'admin.user.updateRole']);

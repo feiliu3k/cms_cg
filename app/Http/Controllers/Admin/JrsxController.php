@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Jrsx;
+use App\User;
+
+use Auth;
 
 class JrsxController extends Controller
 {
@@ -18,7 +21,15 @@ class JrsxController extends Controller
     public function index()
     {
         $searchText=null;
+
+        $pros=Auth::user()->ChaoPros;
+        $proids=array();
+        foreach ($pros as $pro) {
+            array_push($proids, $pro->id);
+        }
+
         $jrsxes = Jrsx::where('delflag',0)
+                ->wherein('proid',$proids)
                 ->orderBy('postdate', 'desc')
                 ->paginate(config('cms.posts_per_page'));
         return view('admin.jrsx.index',compact('jrsxes','searchText'));
@@ -100,6 +111,11 @@ class JrsxController extends Controller
      */
     public function search(Request $request)
     {
+        $pros=Auth::user()->ChaoPros;
+        $proids=array();
+        foreach ($pros as $pro) {
+            array_push($proids, $pro->id);
+        }
         $searchText = $request->searchText;
         $jrsxes = Jrsx::where('delflag',0)
                             ->where('username', 'like', '%'.$searchText.'%')

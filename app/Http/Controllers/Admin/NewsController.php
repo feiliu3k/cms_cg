@@ -13,6 +13,8 @@ use App\Http\Requests\NewsUpdateRequest;
 use App\ChaoSky;
 use App\ChaoPro;
 use App\User;
+use App\VoteItem;
+
 use Auth, Image, DB;
 
 use Carbon\Carbon;
@@ -47,8 +49,6 @@ class NewsController extends Controller
     public function create()
     {
        $data = $this->dispatch(new NewsFormFields());
-
-
        return view('admin.news.create', $data);
     }
 
@@ -58,11 +58,12 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(NewsCreateRequest $request)
+    public function store(Request $request)
     {
         //$post = ChaoSky::create($request->postFillData());
+        // dd($request);
+        // exit;
         $ChaoSky=New ChaoSky();
-
         $ChaoSky->tiptitle=$request->tiptitle;
         $ChaoSky->tipimg1=$request->tipimg1;
         $ChaoSky->tipcontent=$request->tipcontent;
@@ -82,17 +83,46 @@ class NewsController extends Controller
             $ChaoSky->draftflag=0;
         }
 
+        if ($request->voteflag){
+            $ChaoSky->voteflag=1;
+            $ChaoSky->votenum=$request->votenum;
+            $ChaoSky->vbtime=new Carbon($request->vote_begin_date.' '.$request->vote_begin_time
+            );
+            $ChaoSky->vetime=new Carbon($request->vote_end_date.' '.$request->vote_end_time
+
+            );
+        }else{
+            $ChaoSky->voteflag=0;
+            $ChaoSky->votenum=$request->votenum;
+            $ChaoSky->vbtime=new Carbon($request->vote_begin_date.' '.$request->vote_begin_time
+        );
+            $ChaoSky->vetime=new Carbon($request->vote_end_date.' '.$request->vote_end_time
+
+        );
+        }
+
         $ChaoSky->stime=new Carbon($request->publish_date.' '.$request->publish_time
         );
         $ChaoSky->proid=$request->proid;
         $ChaoSky->userid=Auth::user()->id;
         //$ChaoSky->post_user=Auth::user()->id;
         $ChaoSky->save();
+        // todo 存储投票选项列表
+        if ($request->voteflag){
+            $i=0;
+            foreach ($request->vote_items as $vi) {
+                if (trim($vi)!=""){
+                    $voteItem = new VoteItem(['itemcontent' => $vi]);
+                    $voteItem->votecount=$request->votecounts[$i];
+                    $ChaoSky->voteItems()->save($voteItem);
+                }
+                $i++;
+            }
+        }
 
         return redirect()
                         ->route('admin.news.index')
                         ->withSuccess('文章添加成功.');
-
     }
 
     // /**
@@ -130,11 +160,35 @@ class NewsController extends Controller
     {
         $post = ChaoSky::findOrFail($tipid);
         $post->fill($request->postFillData());
+        if ($request->voteflag){
+            $post->voteItems()->delete($post->voteItems);
+            $post->voteflag=1;
+            $i=0;
+            if ($request->vote_items){
+                foreach ($request->vote_items as $vi) {
+                    if (trim($vi)!=""){
+                        $voteItem = new VoteItem(['itemcontent' => $vi]);
+                        $voteItem->votecount=$request->votecounts[$i];
+                        $voteItem->id=$request->voteitemids[$i];
+                        $post->voteItems()->save($voteItem);
+                    }
+                    $i++;
+                }
+            }else{
+               $post->voteItems()->delete($post->voteItems);
+               $post->voteflag=0;
+               $post->votenum=1;
+            }
+        }
+        else{
+            $post->voteItems()->delete($post->voteItems);
+            $post->voteflag=0;
+            $post->votenum=1;
+        }
+
         $post->save();
 
         $next = ChaoSky::where('tipid', '<', $tipid)->max('tipid');
-
-
 
         if ($request->action === 'continue') {
             // return redirect()
