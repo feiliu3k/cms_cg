@@ -26,7 +26,9 @@ get('png', function () {
     ]);
 });
 
-get('/', 'NewsController@index');
+get('/', function(){
+    return redirect('/admin/news');
+});
 
 get('news', 'NewsController@index');
 get('news/{id}', ['uses' => 'NewsController@show', 'as' => 'newsShow']);

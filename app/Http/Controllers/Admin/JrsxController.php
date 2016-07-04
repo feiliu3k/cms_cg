@@ -24,6 +24,7 @@ class JrsxController extends Controller
 
         $pros=Auth::user()->ChaoPros;
         $proids=array();
+
         foreach ($pros as $pro) {
             array_push($proids, $pro->id);
         }

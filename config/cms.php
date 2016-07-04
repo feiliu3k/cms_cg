@@ -1,6 +1,7 @@
 ﻿<?php
 return [
-        'title' => '城管信息',
+        'logo' =>'橄榄台',
+        'title' => '内容',
         'pro' => '栏目',
         'comment' => '评论',
         'upload' => '上传',
