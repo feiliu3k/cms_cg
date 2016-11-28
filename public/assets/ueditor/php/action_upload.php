@@ -12,7 +12,7 @@ $base64 = "upload";
 switch (htmlspecialchars($_GET['action'])) {
     case 'uploadimage':
         $config = array(
-            "pathFormat" => $CONFIG['imagePathFormat'],
+            "pathFormat" => "../..".$CONFIG['imagePathFormat'],//modify feiliu3k
             "maxSize" => $CONFIG['imageMaxSize'],
             "allowFiles" => $CONFIG['imageAllowFiles']
         );
@@ -30,7 +30,7 @@ switch (htmlspecialchars($_GET['action'])) {
         break;
     case 'uploadvideo':
         $config = array(
-            "pathFormat" => $CONFIG['videoPathFormat'],
+            "pathFormat" => "../..".$CONFIG['videoPathFormat'],//modify feiliu3k
             "maxSize" => $CONFIG['videoMaxSize'],
             "allowFiles" => $CONFIG['videoAllowFiles']
         );
@@ -39,7 +39,7 @@ switch (htmlspecialchars($_GET['action'])) {
     case 'uploadfile':
     default:
         $config = array(
-            "pathFormat" => $CONFIG['filePathFormat'],
+            "pathFormat" => "../..".$CONFIG['filePathFormat'],//modify feiliu3k
             "maxSize" => $CONFIG['fileMaxSize'],
             "allowFiles" => $CONFIG['fileAllowFiles']
         );
