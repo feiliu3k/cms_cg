@@ -11,10 +11,8 @@
         "michelf/php-smartypants": "1.6.0-beta1",
         "dflydev/apache-mime-types": "^1.0",
         "doctrine/dbal": "^2.5",
-        "barryvdh/laravel-debugbar": "^2.2",
-        "overtrue/laravel-lang": "1.0.*",
-        "intervention/image": "^2.3",
-        "barryvdh/laravel-ide-helper": "^2.1"
+        "caouecs/laravel-lang": "1.0.*",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
