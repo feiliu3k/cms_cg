@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+/*
 get('png', function () {
     ob_clean();
     ob_start();
@@ -29,7 +29,8 @@ get('png', function () {
 get('/', function(){
     return redirect('/admin/news');
 });
-
+*/
+get('/', ['uses'=>'Admin\NewsController@index','middleware' => 'auth']);
 get('news', 'NewsController@index');
 get('news/{id}', ['uses' => 'NewsController@show', 'as' => 'newsShow']);
 
