@@ -247,8 +247,6 @@ class NewsController extends Controller
                             })
                             ->orderBy('stime', 'desc')->get();
 
-
-
        return view('admin.news.search',compact('chaoSkies','searchText'));
     }
 }
