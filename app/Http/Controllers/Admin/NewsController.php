@@ -231,37 +231,24 @@ class NewsController extends Controller
     public function search(Request $request)
     {
         $searchText = $request->searchText;
-        $pros=ChaoPro::where('proname','like', '%'.$request->searchText.'%')->get();
-        $users=User::where('name','like', '%'.$request->searchText.'%')->get();
 
-        $ipros=Auth::user()->ChaoPros;
-        $iproids=array();
-        foreach ($ipros as $ipro) {
-            array_push($iproids, $ipro->id);
-        }
-
+        $pros=Auth::user()->ChaoPros;
         $proids=array();
         foreach ($pros as $pro) {
-            if (in_array($pro->id, $iproids)){
-                array_push($proids, $pro->id);
-            }
+            array_push($proids, $pro->id);
         }
 
-        $userids=array();
-        foreach ($users as $user) {
-            array_push($userids, $user->id);
-        }
+        $chaoSkies = ChaoSky::where('delflag',0)
+                            ->wherein('proid',$proids)
+                            ->where(function($query)
+                            {
+                                $query->where('tiptitle', 'like', '%'.$searchText.'%')
+                                      ->orwhere('tipcontent', 'like', '%'.$searchText.'%')
+                            })
+                            ->orderBy('stime', 'desc')->get();
 
-        // $chaoSkies = ChaoSky::where('delflag',0)
-        //                     ->where('tiptitle', 'like', '%'.$searchText.'%')
-        //                     ->orwhere('tipcontent', 'like', '%'.$searchText.'%')
-        //                     ->orwherein('proid',$proids)
-        //                     ->orwherein('userid',$userids)
-        //                     ->orderBy('stime', 'desc')->get();
 
-        $chaoSkies=DB::select('SELECT s.*,p.proname,u.name username,pu.name postUser FROM chaosky s JOIN chaopro p ON s.proid=p.id JOIN users u ON u.id= s.userid LEFT JOIN users pu ON pu.id= s.post_user
-WHERE s.delflag=0 AND ( s.tiptitle LIKE ? OR s.tipcontent LIKE ? OR s.proid IN (SELECT pro_id FROM pro_user WHERE user_id=? and pro_id in (select id from chaopro where proname LIKE ? )) OR s.userid IN (SELECT id FROM users WHERE NAME LIKE ?)) ORDER BY s.stime desc ',['%'.$request->searchText.'%','%'.$request->searchText.'%',Auth::user()->id,'%'.$request->searchText.'%','%'.$request->searchText.'%']);
-        //dd($chaoSkies);
+
        return view('admin.news.search',compact('chaoSkies','searchText'));
     }
 }
