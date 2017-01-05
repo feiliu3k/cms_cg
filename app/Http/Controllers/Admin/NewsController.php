@@ -246,7 +246,27 @@ class NewsController extends Controller
                                       ->orwhere('tipcontent', 'like', '%'.$searchText.'%');
                             })
                             ->orderBy('stime', 'desc')->get();
+        
+        return view('admin.news.search',compact('chaoSkies','searchText'));
+    }
 
-       return view('admin.news.search',compact('chaoSkies','searchText'));
+    public function searchByPro($proid)
+    {
+        $searchText=null;
+        $pros=Auth::user()->ChaoPros;
+        $proids=array();
+        foreach ($pros as $pro) {
+            array_push($proids, $pro->id);
+        }
+
+        $chaoSkies=null;
+        
+        if (in_array($proid, $proids)){
+            $chaoSkies = ChaoSky::where('delflag',0)
+                    ->where('proid',$proid)
+                    ->orderBy('stime', 'desc')
+                    ->paginate(config('cms.posts_per_page'));
+        }
+        return view('admin.news.index',compact('chaoSkies','searchText'));
     }
 }

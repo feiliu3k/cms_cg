@@ -48,11 +48,11 @@
             @foreach ($chaoSkies as $chaoSky)
                 <tr>
                     <td data-order="{{ $chaoSky->stime }}">
-                        {{ $chaoSky->stime }}
+                        {{ $chaoSky->stime->format('Y-m-d H:i:s') }}
                     </td>
                     <td>{{ $chaoSky->tiptitle }}</td>
-                    <td>{{ $chaoSky->proname }}</td>
-                    <td>{{ $chaoSky->username }}</td>
+                    <td>{{ $chaoSky->chaoPro->proname }}</td>
+                    <td>{{ $chaoSky->createUser->name }}</td>
                     <td>
                         @if ($chaoSky->postUser)
                             {{ $chaoSky->postUser }}

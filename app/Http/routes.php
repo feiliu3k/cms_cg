@@ -70,6 +70,7 @@ $router->group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     resource('admin/jrsx','JrsxController');
 
     get('admin/news/search',['uses'=>'NewsController@search','as'=>'admin.news.search']);
+    get('admin/news/searchbypro/{proid}',['uses'=>'NewsController@searchByPro','as'=>'admin.news.searchbypro']);
     resource('admin/news', 'NewsController', ['except' => 'show']);
 
     resource('admin/pro', 'ProController',['except' => 'show']);
