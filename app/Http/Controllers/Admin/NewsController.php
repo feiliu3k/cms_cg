@@ -240,10 +240,10 @@ class NewsController extends Controller
 
         $chaoSkies = ChaoSky::where('delflag',0)
                             ->wherein('proid',$proids)
-                            ->where(function($query)
+                            ->where(function ($query) use ($searchText)
                             {
                                 $query->where('tiptitle', 'like', '%'.$searchText.'%')
-                                      ->orwhere('tipcontent', 'like', '%'.$searchText.'%')
+                                      ->orwhere('tipcontent', 'like', '%'.$searchText.'%');
                             })
                             ->orderBy('stime', 'desc')->get();
 
