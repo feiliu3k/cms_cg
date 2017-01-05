@@ -41,6 +41,11 @@
                     <th>审核人</th>
                     <th>审核标志</th>
                     <th>草稿标志</th>
+                    @if (Auth::check())
+                        @can('list-readnum')
+                            <th>阅读数</th>
+                        @endcan
+                    @endif
                     <th data-sortable="false">操作</th>
                 </tr>
             </thead>
@@ -51,7 +56,11 @@
                         {{ $chaoSky->stime->format('Y-m-d H:i:s') }}
                     </td>
                     <td>{{ $chaoSky->tiptitle }}</td>
-                    <td>{{ $chaoSky->chaoPro->proname }}</td>
+                    <td> 
+                        <a href="{{ route('admin.news.searchbypro', $chaoSky->proid) }}" >
+                                {{ $chaoSky->chaoPro->proname }}
+                        </a>
+                    </td>
                     <td>{{ $chaoSky->createUser->name }}</td>
                     <td>
                         @if ($chaoSky->postUser)

@@ -47,12 +47,13 @@
                         @endcan
                     @endif
                     <th data-sortable="false">操作</th>
+
                 </tr>
             </thead>
             <tbody>
             @foreach ($chaoSkies as $chaoSky)
                 <tr>
-                    <td data-order="{{ $chaoSky->stime->timestamp }}">
+                    <td>
                         {{ $chaoSky->stime->format('Y-m-d H:i:s') }}
                     </td>
                     <td>{{ $chaoSky->tiptitle }}</td>
